@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: cd frontend && yarn && yarn run build-stage
+      - run: cd ./frontend && yarn && yarn run build-stage
         env:
           REACT_APP_VERSION: ${{ secrets.REACT_APP_VERSION }}
           PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
@@ -28,6 +28,7 @@ jobs:
           REACT_APP_FIREBASE_MEASUREMENT_ID: ${{ secrets.REACT_APP_FIREBASE_MEASUREMENT_ID }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
+          entrypoint: ./frontend
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CNSP_FYP }}"
           projectId: cnsp-fyp
