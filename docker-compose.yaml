@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  #frontend
+  frontend:
+    container_name: cnsp-frontend
+    image: cnsp-frontend:1.0.0
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+
+  # backend
+  backend:
+    container_name: cnsp-backend
+    image: cnsp-backend:1.0.0
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app
+    env_file:
+      - ./backend/.env
