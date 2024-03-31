@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: google-github-actions/auth@main
+      - uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
@@ -27,7 +27,7 @@ jobs:
 
       - name: Configure Docker Client
         run: |-
-          gcloud auth configure-docker --quiet
+          gcloud auth configure-docker gcr.io --quiet
 
       - name: Push Docker Image to Container Registry (GCR)
         run: |-
