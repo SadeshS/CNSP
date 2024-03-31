@@ -6,7 +6,7 @@ cred = credentials.Certificate({
     "type": "service_account",
     "project_id": settings.FIREBASE_PROJECTID,
     "private_key_id": settings.FIREBASE_PRIVATEKEYID,
-    "private_key": settings.FIREBASE_PRIVATEKEY,
+    "private_key": settings.FIREBASE_PRIVATEKEY.replace(r'\n', '\n'),
     "client_email": settings.FIREBASE_CLIENTEMAIL,
     "client_id": settings.FIREBASE_CLIENTID,
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",

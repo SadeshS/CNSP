@@ -3,14 +3,12 @@ services:
   #frontend
   frontend:
     container_name: cnsp-frontend
-    image: cnsp-frontend:1.0.0
+    image: cnsp-frontend
     build: 
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-    volumes:
-      - ./frontend:/app
     env_file:
       - ./frontend/.env
     depends_on:
@@ -19,13 +17,11 @@ services:
   # backend
   backend:
     container_name: cnsp-backend
-    image: cnsp-backend:1.0.0
+    image: cnsp-backend
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
-    volumes:
-      - ./backend:/app
+      - 8080:8080
     env_file:
       - ./backend/.env

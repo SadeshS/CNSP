@@ -8,7 +8,8 @@ app = FastAPI(
 )
 
 origins = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://cnsp-fyp.web.app'
 ]
 
 app.add_middleware(
