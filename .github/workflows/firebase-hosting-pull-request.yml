@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: cd ./frontend && yarn && yarn run build-stage
+      - run: cd ./frontend && yarn && yarn run build
         env:
           REACT_APP_VERSION: ${{ secrets.REACT_APP_VERSION }}
           PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
