@@ -10,6 +10,7 @@ jobs:
     env:
       IMAGE_NAME: cnsp-backend
       PROJECT_ID: cnsp-backend-418915
+      REGION: us-central1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,16 +23,34 @@ jobs:
         with:
           project_id: ${{ env.PROJECT_IDD }}
 
-      - name: Build Docker image
-        run: cd ./backend && docker build -t $IMAGE_NAME:latest .
+      - name: Docker Auth
+        id: docker-auth
+        uses: "docker/login-action@v3"
+        with:
+          username: "sadeshs"
+          password: "${{ secrets.DOCKER_TOCKEN }}"
+          registry: "${{ env.REGION }}-docker.pkg.dev"
 
-      - name: Configure Docker Client
-        run: |-
-          gcloud auth configure-docker gcr.io --quiet
+      - name: Build, tag and push container
+        id: build-image
+        uses: docker/build-push-action@v3
+        with:
+          context: ./backend
+          push: true
+          tags: |
+            gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}
 
-      - name: Push Docker Image to Container Registry (GCR)
-        run: |-
-          gcloud auth print-access-token 
-          docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
-          docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-          docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: cnsp-backend-service
+          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE_NAME }}
+          region: ${{ env.region }}
+          env_vars: |
+            FIREBASE_PROJECTID=${{ secrets.FIREBASE_PROJECTID }}
+            FIREBASE_PRIVATEKEYID=${{ secrets.FIREBASE_PRIVATEKEYID }}
+            FIREBASE_PRIVATEKEY=${{ secrets.FIREBASE_PRIVATEKEY }}
+            FIREBASE_CLIENTEMAIL=${{ secrets.FIREBASE_CLIENTEMAIL }}
+            FIREBASE_CLIENTID=${{ secrets.FIREBASE_CLIENTID }}
+            FIREBASE_CLIENTx509CERTURL=${{ secrets.FIREBASE_CLIENTx509CERTURL }}
