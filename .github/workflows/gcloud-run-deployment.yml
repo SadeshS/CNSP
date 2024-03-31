@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@main
+        uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
@@ -23,8 +23,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          entrypoint: ./backend
-          context: .
+          context: ./backend
           push: true
           tags: gcr.io/${{ secrets.GCLOUD_PROJECT_ID }}/cnsp-backend:latest
           build-args: |
