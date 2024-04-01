@@ -9,7 +9,8 @@ import numpy as np
 
 def run(df):
     full_df = df
-    final_df = handle_over_fitting(full_df)
+    final_df = full_df
+    # final_df = handle_over_fitting(full_df)
     orders_df = feature_extraction(final_df)
     product_to_vec_model = product_to_vec(final_df)
 
@@ -64,6 +65,7 @@ def run(df):
 
     # Quantity and date prediction using meta prophet
     result_df = predict(new_basket_df, final_df)
+    result_df = result_df[result_df['quantity'] > 0]
     result_df['quantity'] = result_df['quantity'].apply(np.ceil).astype(int)
 
     return result_df
