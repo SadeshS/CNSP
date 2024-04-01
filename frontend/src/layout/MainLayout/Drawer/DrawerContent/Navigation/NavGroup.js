@@ -17,9 +17,6 @@ import {
   useMediaQuery
 } from '@mui/material';
 
-// third-party
-import { FormattedMessage } from 'react-intl';
-
 // project-imports
 import NavItem from './NavItem';
 import SimpleBar from 'components/third-party/SimpleBar';
@@ -238,7 +235,7 @@ const NavGroup = ({ item, lastItem, remItems, lastItemId }) => {
               sx={{ mr: 1 }}
               primary={
                 <Typography variant="h6" color={isSelected ? 'primary' : textColor} sx={{ fontWeight: isSelected ? 500 : 400 }}>
-                  {currentItem.id === lastItemId ? <FormattedMessage id="More Items" /> : currentItem.title}
+                  {currentItem.id === lastItemId ? "More Items" : currentItem.title}
                 </Typography>
               }
             />
