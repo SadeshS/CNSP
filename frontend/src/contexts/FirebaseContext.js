@@ -29,7 +29,8 @@ if (!firebase.apps.length) {
 const initialState = {
   isLoggedIn: false,
   isInitialized: false,
-  user: null
+  user: null,
+  token: null
 };
 
 // ==============================|| FIREBASE CONTEXT & PROVIDER ||============================== //
@@ -43,18 +44,27 @@ export const FirebaseProvider = ({ children }) => {
     () =>
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          dispatch({
-            type: LOGIN,
-            payload: {
-              isLoggedIn: true,
-              user: {
-                id: user.uid,
-                email: user.email,
-                name: user.displayName || 'Stebin Ben',
-                role: 'UI/UX Designer'
-              }
-            }
-          });
+          user
+            .getIdToken()
+            .then(function (idToken) {
+              dispatch({
+                type: LOGIN,
+                payload: {
+                  isLoggedIn: true,
+                  user: {
+                    id: user.uid,
+                    email: user.email,
+                    name: user.displayName
+                  },
+                  token: idToken
+                }
+              });
+            })
+            .catch(function () {
+              dispatch({
+                type: LOGOUT
+              });
+            });
         } else {
           dispatch({
             type: LOGOUT

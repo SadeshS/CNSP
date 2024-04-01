@@ -47,7 +47,11 @@ const MainRoutes = {
     },
     {
       path: '/',
-      element: <CommonLayout layout="landing" />,
+      element: (
+        <AuthGuard>
+          <MainLayout />
+        </AuthGuard>
+      ),
       children: [
         {
           path: 'landing',

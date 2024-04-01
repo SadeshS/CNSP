@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
 import {
   Box,
+  Button,
   Chip,
   Collapse,
   Divider,
@@ -48,6 +49,35 @@ function Row({ row }) {
   let date = new Date(`${row.created_time} UTC`);
   date = formatLocalDateFromUTC(date);
 
+  const exportToCsv = (data) => {
+    const csvData = convertToCSV(data);
+
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'download.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  const convertToCSV = (arr) => {
+    const headers = Object.keys(arr[0]).join(',') + '\n';
+
+    const rows = arr
+      .map((obj) =>
+        Object.values(obj)
+          .map((value) => `"${value.toString().replace(/"/g, '""')}"`)
+          .join(',')
+      )
+      .join('\n');
+
+    return headers + rows;
+  };
+
   return (
     <>
       <TableRow hover sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -65,7 +95,19 @@ function Row({ row }) {
         <TableCell>
           {row.status === 'success' && <Chip color="success" label="Success" size="small" variant="light" />}
           {row.status === 'in_progress' && <Chip color="info" label="In Progress" size="small" variant="light" />}
-          {row.status === 'error' && <Chip color="error" label="Error" size="small" variant="light" />}
+          {row.status === 'failed' && <Chip color="error" label="Failed" size="small" variant="light" />}
+        </TableCell>
+        <TableCell>
+          <Button
+            size="large"
+            variant="contained"
+            disabled={row.predictions === null || row.predictions.length <= 0}
+            onClick={() => {
+              exportToCsv(row.predictions);
+            }}
+          >
+            Export
+          </Button>
         </TableCell>
       </TableRow>
       <TableRow sx={{ bgcolor: backColor, '&:hover': { bgcolor: `${backColor} !important` } }}>
@@ -121,12 +163,12 @@ Row.propTypes = {
 
 export default function Results() {
   const [results, setResults] = useState([]);
-  const { user } = useAuth();
+  const { token } = useAuth();
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('id');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     fetchResults();
@@ -135,9 +177,14 @@ export default function Results() {
 
   async function fetchResults() {
     try {
-      let response = await axiosServices.get(`/user/${user.id}`);
-      console.log(response.data.predictions);
-      setResults(response.data.predictions);
+      let response = await axiosServices.get(`/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      if (response.data.predictions) {
+        setResults(response.data.predictions);
+      }
     } catch (error) {
       setResults([]);
     }
@@ -210,16 +257,19 @@ export default function Results() {
               </TableCell>
               <TableCell>Created Time</TableCell>
               <TableCell>Status</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {stableSort(results, getComparator(order, orderBy))
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                if (typeof row === 'number') return null;
+            {results != null &&
+              results.length > 0 &&
+              stableSort(results, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  if (typeof row === 'number') return null;
 
-                return <Row key={row.name} row={row} />;
-              })}
+                  return <Row key={row.name} row={row} />;
+                })}
 
             {emptyRows > 0 && (
               <TableRow sx={{ height: 53 * emptyRows }}>
