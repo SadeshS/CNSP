@@ -40,14 +40,7 @@ const Navigation = () => {
 
   let getMenu = Menu();
   const handlerMenuItem = () => {
-    const isFound = menuItem.items.some((element) => {
-      if (element.id === 'group-dashboard') {
-        return true;
-      }
-      return false;
-    });
-
-    if (getMenu?.id !== undefined && !isFound) {
+    if (getMenu?.id !== undefined) {
       menuItem.items.splice(0, 0, getMenu);
       setMenuItems(menuItem);
     }

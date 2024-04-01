@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -10,7 +9,7 @@ import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, u
 import Dot from 'components/@extended/Dot';
 import useConfig from 'hooks/useConfig';
 import { dispatch, useSelector } from 'store';
-import { activeItem, openDrawer } from 'store/reducers/menu';
+import { openDrawer } from 'store/reducers/menu';
 import { MenuOrientation, ThemeMode } from 'config';
 
 // ==============================|| NAVIGATION - ITEM ||============================== //
@@ -31,28 +30,6 @@ const NavItem = ({ item, level }) => {
 
   const Icon = item.icon;
   const itemIcon = item.icon ? <Icon variant="Bulk" size={drawerOpen ? 20 : 22} /> : false;
-
-  const { pathname } = useLocation();
-
-  // active menu item on page load
-  useEffect(() => {
-    if (pathname && pathname.includes('product-details')) {
-      if (item.url && item.url.includes('product-details')) {
-        dispatch(activeItem({ openItem: [item.id] }));
-      }
-    }
-
-    if (pathname && pathname.includes('kanban')) {
-      if (item.url && item.url.includes('kanban')) {
-        dispatch(activeItem({ openItem: [item.id] }));
-      }
-    }
-
-    if (pathname === item.url) {
-      dispatch(activeItem({ openItem: [item.id] }));
-    }
-    // eslint-disable-next-line
-  }, [pathname]);
 
   const textColor = theme.palette.mode === ThemeMode.DARK ? 'secondary.400' : 'secondary.main';
   const iconSelectedColor = 'primary.main';

@@ -10,8 +10,6 @@ import 'assets/fonts/inter/inter.css';
 
 // scroll bar
 import 'simplebar/dist/simplebar.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 // project-imports
 import App from './App';
