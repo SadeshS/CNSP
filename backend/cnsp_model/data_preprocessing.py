@@ -1,12 +1,6 @@
-from io import StringIO
 import pandas as pd
 from math import ceil
 import gensim
-
-def read_csv(content):
-    string_io = StringIO(content.decode("utf-8"))
-    df = pd.read_csv(string_io)
-    return df
 
 def feature_extraction(df: pd.DataFrame):
     orders = df.groupby('order_id').apply(lambda x: x.drop_duplicates(subset=['user_id'])).reset_index(drop=True)

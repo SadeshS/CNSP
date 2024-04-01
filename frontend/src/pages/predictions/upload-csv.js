@@ -17,7 +17,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 const UploadCSV = () => {
-  const { user } = useAuth();
+  const { token } = useAuth();
   const navigate = useNavigate();
   return (
     <Grid>
@@ -26,42 +26,46 @@ const UploadCSV = () => {
           <Formik
             initialValues={{ files: null }}
             onSubmit={async (values) => {
-              try {
-                if (values.files.length > 0) {
-                  const formData = new FormData();
-                  formData.append('file', values.files[0]);
-                  const response = await axiosService.post(`/predictions/predict/${user.id}`, formData, {
+              if (values.files.length > 0) {
+                const formData = new FormData();
+                formData.append('file', values.files[0]);
+                axiosService
+                  .post(`/predictions/predict`, formData, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      Authorization: `Bearer ${token}`
                     }
-                  });
-
-                  dispatch(
-                    openSnackbar({
-                      open: true,
-                      message: response.data.message,
-                      variant: 'alert',
-                      alert: {
-                        color: 'success'
-                      },
-                      close: true
-                    })
-                  );
-
-                  navigate('/');
-                }
-              } catch (error) {
-                dispatch(
-                  openSnackbar({
-                    open: true,
-                    message: 'Error while uploading the csv file. Please try again later.',
-                    variant: 'alert',
-                    alert: {
-                      color: 'error'
-                    },
-                    close: true
                   })
-                );
+                  .then((response) => {
+                    dispatch(
+                      openSnackbar({
+                        open: true,
+                        message: response.data.message,
+                        variant: 'alert',
+                        alert: {
+                          color: 'success'
+                        },
+                        close: true
+                      })
+                    );
+                    navigate('/');
+                  })
+                  .catch(function (err) {
+                    dispatch(
+                      openSnackbar({
+                        open: true,
+                        message:
+                          err.response.status == 400
+                            ? err.response.data.message
+                            : 'Error while uploading the csv file. Please try again later.',
+                        variant: 'alert',
+                        alert: {
+                          color: 'error'
+                        },
+                        close: true
+                      })
+                    );
+                  });
               }
             }}
             validationSchema={yup.object().shape({

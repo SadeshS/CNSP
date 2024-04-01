@@ -25,7 +25,7 @@ const initialState = {
 const ConfigContext = createContext(initialState);
 
 function ConfigProvider({ children }) {
-  const [config, setConfig] = useLocalStorage('able-pro-material-react-ts-config', initialState);
+  const [config, setConfig] = useLocalStorage('cnsp-config', initialState);
 
   const onChangeContainer = () => {
     setConfig({

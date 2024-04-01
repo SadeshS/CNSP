@@ -17,12 +17,8 @@ import {
   useMediaQuery
 } from '@mui/material';
 
-// third-party
-import { FormattedMessage } from 'react-intl';
-
 // project-imports
 import NavItem from './NavItem';
-import NavCollapse from './NavCollapse';
 import SimpleBar from 'components/third-party/SimpleBar';
 import Transitions from 'components/@extended/Transitions';
 
@@ -59,7 +55,7 @@ const PopperStyled = styled(Popper)(({ theme }) => ({
   }
 }));
 
-const NavGroup = ({ item, lastItem, remItems, lastItemId, setSelectedItems, selectedItems, setSelectedLevel, selectedLevel }) => {
+const NavGroup = ({ item, lastItem, remItems, lastItemId }) => {
   const theme = useTheme();
   const { pathname } = useLocation();
 
@@ -134,19 +130,6 @@ const NavGroup = ({ item, lastItem, remItems, lastItemId, setSelectedItems, sele
 
   const navCollapse = item.children?.map((menuItem) => {
     switch (menuItem.type) {
-      case 'collapse':
-        return (
-          <NavCollapse
-            key={menuItem.id}
-            menu={menuItem}
-            setSelectedItems={setSelectedItems}
-            setSelectedLevel={setSelectedLevel}
-            selectedLevel={selectedLevel}
-            selectedItems={selectedItems}
-            level={1}
-            parentId={currentItem.id}
-          />
-        );
       case 'item':
         return <NavItem key={menuItem.id} item={menuItem} level={1} />;
       default:
@@ -167,19 +150,6 @@ const NavGroup = ({ item, lastItem, remItems, lastItemId, setSelectedItems, sele
       )}
       {itemRem?.elements?.map((menu) => {
         switch (menu.type) {
-          case 'collapse':
-            return (
-              <NavCollapse
-                key={menu.id}
-                menu={menu}
-                level={1}
-                parentId={currentItem.id}
-                setSelectedItems={setSelectedItems}
-                setSelectedLevel={setSelectedLevel}
-                selectedLevel={selectedLevel}
-                selectedItems={selectedItems}
-              />
-            );
           case 'item':
             return <NavItem key={menu.id} item={menu} level={1} />;
           default:
@@ -196,19 +166,6 @@ const NavGroup = ({ item, lastItem, remItems, lastItemId, setSelectedItems, sele
   // menu list collapse & items
   const items = currentItem.children?.map((menu) => {
     switch (menu.type) {
-      case 'collapse':
-        return (
-          <NavCollapse
-            key={menu.id}
-            menu={menu}
-            level={1}
-            parentId={currentItem.id}
-            setSelectedItems={setSelectedItems}
-            setSelectedLevel={setSelectedLevel}
-            selectedLevel={selectedLevel}
-            selectedItems={selectedItems}
-          />
-        );
       case 'item':
         return <NavItem key={menu.id} item={menu} level={1} />;
       default:
@@ -278,7 +235,7 @@ const NavGroup = ({ item, lastItem, remItems, lastItemId, setSelectedItems, sele
               sx={{ mr: 1 }}
               primary={
                 <Typography variant="h6" color={isSelected ? 'primary' : textColor} sx={{ fontWeight: isSelected ? 500 : 400 }}>
-                  {currentItem.id === lastItemId ? <FormattedMessage id="More Items" /> : currentItem.title}
+                  {currentItem.id === lastItemId ? 'More Items' : currentItem.title}
                 </Typography>
               }
             />

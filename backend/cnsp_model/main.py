@@ -1,4 +1,4 @@
-from cnsp_model.data_preprocessing import read_csv, feature_extraction, handle_over_fitting, product_to_vec
+from cnsp_model.data_preprocessing import feature_extraction, handle_over_fitting, product_to_vec
 from cnsp_model.embedding_wrapper import EmbeddingWrapper
 from cnsp_model.basket_constructor import BasketConstructor
 from cnsp_model.helper_functions import nested_change, remove_products_which_are_uncommon, remove_short_baskets, split_data
@@ -7,8 +7,8 @@ from cnsp_model.knn_dtw import KnnDtw
 from cnsp_model.meta_prophet import predict
 import numpy as np
 
-def run(content):
-    full_df = read_csv(content)
+def run(df):
+    full_df = df
     final_df = handle_over_fitting(full_df)
     orders_df = feature_extraction(final_df)
     product_to_vec_model = product_to_vec(final_df)

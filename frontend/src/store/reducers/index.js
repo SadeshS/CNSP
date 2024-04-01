@@ -4,22 +4,20 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 // project-imports
-import menu from './menu';
+import menuReducer from './menu';
 import snackbar from './snackbar';
-import cartReducer from './cart';
 
 // ==============================|| COMBINE REDUCERS ||============================== //
 
 const reducers = combineReducers({
-  menu,
   snackbar,
-  cart: persistReducer(
+  menu: persistReducer(
     {
-      key: 'cart',
+      key: 'menu',
       storage,
-      keyPrefix: 'able-pro-material-ts-'
+      keyPrefix: 'cnsp-ts-'
     },
-    cartReducer
+    menuReducer
   )
 });
 
