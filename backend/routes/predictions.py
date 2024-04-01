@@ -1,23 +1,28 @@
 from io import StringIO
-from fastapi import Depends, File, UploadFile, HTTPException, APIRouter, BackgroundTasks
+from fastapi import Depends, HTTPException, APIRouter, BackgroundTasks
 from fastapi.responses import JSONResponse
 import pandas as pd
 from services.prediction_service import PredictionService
 from routes.deps import get_current_user
+import requests
+from models.predict_data import PredictData
+from config.firebase import storage
+from urllib.parse import unquote
 
 router = APIRouter()
 
 @router.post('/predict')
-async def predict(background_tasks: BackgroundTasks, current_user=Depends(get_current_user), file: UploadFile = File(...)):
-    if file.content_type != 'text/csv':
-        raise HTTPException(400, 'Invalid file type. Please uploda a CSV file.')
-    
+async def predict(downloadURL: PredictData, background_tasks: BackgroundTasks, current_user=Depends(get_current_user)):
+    print(downloadURL)
     try:
+        response = requests.get(downloadURL.url)
+        response.raise_for_status()
+
         ps = PredictionService()
 
-        content = await file.read()
+        df = read_csv(response)
 
-        df = read_csv(content)
+        delete_file(downloadURL.url)
 
         columns_to_check = ['quantity', 'user_id', 'order_id', 'product_id', 'date']
 
@@ -33,10 +38,17 @@ async def predict(background_tasks: BackgroundTasks, current_user=Depends(get_cu
     
     except Exception as e:
         raise HTTPException(500, str(e))
-    finally:
-        await file.close()
-
-def read_csv(content):
-    string_io = StringIO(content.decode("utf-8"))
+    
+def read_csv(response):
+    string_io = StringIO(response.content.decode('utf-8'))
     df = pd.read_csv(string_io)
     return df
+
+def delete_file(url):
+    path_start = url.find("/o/") + 3
+    path_end = url.find("?alt=media")
+    file_path = url[path_start:path_end]
+    file_path = unquote(file_path)
+    bucket = storage.bucket()
+    blob = bucket.blob(file_path)
+    blob.delete()

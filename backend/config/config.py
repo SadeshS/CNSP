@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     FIREBASE_CLIENTEMAIL: str
     FIREBASE_CLIENTID: str
     FIREBASE_CLIENTx509CERTURL:str
+    FIREBASE_STORAGEBUCKETURL:str
 
     DOMAIN: str = "localhost"
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"

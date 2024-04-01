@@ -1,5 +1,5 @@
 import firebase_admin
-from firebase_admin import credentials, auth, firestore
+from firebase_admin import credentials, auth, firestore, storage
 from config.config import settings
 
 cred = credentials.Certificate({
@@ -15,8 +15,12 @@ cred = credentials.Certificate({
     "client_x509_cert_url": settings.FIREBASE_CLIENTx509CERTURL,
     "universe_domain": "googleapis.com"
 })
-firebase = firebase_admin.initialize_app(cred)
+firebase = firebase_admin.initialize_app(cred, {
+    'storageBucket': settings.FIREBASE_STORAGEBUCKETURL
+})
 
 firebase_auth = auth
 
 db = firestore.client()
+
+storage = storage

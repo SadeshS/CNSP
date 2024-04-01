@@ -15,9 +15,10 @@ import axiosService from 'utils/axios';
 // third-party
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const UploadCSV = () => {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const navigate = useNavigate();
   return (
     <Grid>
@@ -27,45 +28,55 @@ const UploadCSV = () => {
             initialValues={{ files: null }}
             onSubmit={async (values) => {
               if (values.files.length > 0) {
-                const formData = new FormData();
-                formData.append('file', values.files[0]);
-                axiosService
-                  .post(`/predictions/predict`, formData, {
-                    headers: {
-                      'Content-Type': 'multipart/form-data',
-                      Authorization: `Bearer ${token}`
-                    }
-                  })
-                  .then((response) => {
-                    dispatch(
-                      openSnackbar({
-                        open: true,
-                        message: response.data.message,
-                        variant: 'alert',
-                        alert: {
-                          color: 'success'
+                const storage = getStorage();
+                const storageRef = ref(storage, `${user.id}/${values.files[0].name}`);
+
+                uploadBytes(storageRef, values.files[0]).then((snapshot) => {
+                  getDownloadURL(snapshot.ref).then((downloadURL) => {
+                    axiosService
+                      .post(
+                        `/predictions/predict`,
+                        {
+                          url: downloadURL
                         },
-                        close: true
+                        {
+                          headers: {
+                            Authorization: `Bearer ${token}`
+                          }
+                        }
+                      )
+                      .then((response) => {
+                        dispatch(
+                          openSnackbar({
+                            open: true,
+                            message: response.data.message,
+                            variant: 'alert',
+                            alert: {
+                              color: 'success'
+                            },
+                            close: true
+                          })
+                        );
+                        navigate('/');
                       })
-                    );
-                    navigate('/');
-                  })
-                  .catch(function (err) {
-                    dispatch(
-                      openSnackbar({
-                        open: true,
-                        message:
-                          err.response.status == 400
-                            ? err.response.data.message
-                            : 'Error while uploading the csv file. Please try again later.',
-                        variant: 'alert',
-                        alert: {
-                          color: 'error'
-                        },
-                        close: true
-                      })
-                    );
+                      .catch(function (err) {
+                        dispatch(
+                          openSnackbar({
+                            open: true,
+                            message:
+                              err.response.status == 400
+                                ? err.response.data.message
+                                : 'Error while uploading the csv file. Please try again later.',
+                            variant: 'alert',
+                            alert: {
+                              color: 'error'
+                            },
+                            close: true
+                          })
+                        );
+                      });
                   });
+                });
               }
             }}
             validationSchema={yup.object().shape({
