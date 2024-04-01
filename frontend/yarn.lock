@@ -1119,7 +1119,7 @@
   resolved "https://registry.npmjs.org/@babel/regjsgen/-/regjsgen-0.8.0.tgz"
   integrity sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.7", "@babel/runtime@^7.21.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.7", "@babel/runtime@^7.21.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.22.3"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.22.3.tgz"
   integrity sha512-XsDuspWKLUsxwCp6r7EhsExHtYfbe5oAGQ19kqngTdCPUoPQzOPdUbD/pB9PJiwb2ptYKQDjSJT3R6dC+EPqfQ==
@@ -2324,92 +2324,6 @@
   version "1.1.0"
   resolved "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
-
-"@react-spring/animated@~9.7.2":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/animated/-/animated-9.7.2.tgz"
-  integrity sha512-ipvleJ99ipqlnHkz5qhSsgf/ny5aW0ZG8Q+/2Oj9cI7LCc7COdnrSO6V/v8MAX3JOoQNzfz6dye2s5Pt5jGaIA==
-  dependencies:
-    "@react-spring/shared" "~9.7.2"
-    "@react-spring/types" "~9.7.2"
-
-"@react-spring/core@~9.7.1", "@react-spring/core@~9.7.2":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/core/-/core-9.7.2.tgz"
-  integrity sha512-fF512edZT/gKVCA90ZRxfw1DmELeVwiL4OC2J6bMUlNr707C0h4QRoec6DjzG27uLX2MvS1CEatf9KRjwZR9/w==
-  dependencies:
-    "@react-spring/animated" "~9.7.2"
-    "@react-spring/rafz" "~9.7.2"
-    "@react-spring/shared" "~9.7.2"
-    "@react-spring/types" "~9.7.2"
-
-"@react-spring/konva@~9.7.1":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/konva/-/konva-9.7.2.tgz"
-  integrity sha512-xMA0XkIyv02euso8BGlLA4iXVJ76p6WCjABMTjdvcp//KvIub596vLwoLzmqHYjqRhH7BP4UQKxzhHvM7AylQA==
-  dependencies:
-    "@react-spring/animated" "~9.7.2"
-    "@react-spring/core" "~9.7.2"
-    "@react-spring/shared" "~9.7.2"
-    "@react-spring/types" "~9.7.2"
-
-"@react-spring/native@~9.7.1":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/native/-/native-9.7.2.tgz"
-  integrity sha512-Ltq/F+4jY7aqHW1/f1xUb+e3XGbVxnllXfDYU+3nXi4sa7O+du755hpNbCHJ5ZgtkQYFKtQ7I+InTY+CDXPYfw==
-  dependencies:
-    "@react-spring/animated" "~9.7.2"
-    "@react-spring/core" "~9.7.2"
-    "@react-spring/shared" "~9.7.2"
-    "@react-spring/types" "~9.7.2"
-
-"@react-spring/rafz@~9.7.2":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/rafz/-/rafz-9.7.2.tgz"
-  integrity sha512-kDWMYDQto3+flkrX3vy6DU/l9pxQ4TVW91DglQEc11iDc7shF4+WVDRJvOVLX+xoMP7zyag1dMvlIgvQ+dvA/A==
-
-"@react-spring/shared@~9.7.2":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/shared/-/shared-9.7.2.tgz"
-  integrity sha512-6U9qkno+9DxlH5nSltnPs+kU6tYKf0bPLURX2te13aGel8YqgcpFYp5Av8DcN2x3sukinAsmzHUS/FRsdZMMBA==
-  dependencies:
-    "@react-spring/rafz" "~9.7.2"
-    "@react-spring/types" "~9.7.2"
-
-"@react-spring/three@~9.7.1":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/three/-/three-9.7.2.tgz"
-  integrity sha512-u7VAjc+az82PM+WOC2sTbZQLBixuN+0jX/oahzyjEnIds5eUJgaBqZRYAAEMupuzGGl8H3QqL3bFgBEQLq6ADQ==
-  dependencies:
-    "@react-spring/animated" "~9.7.2"
-    "@react-spring/core" "~9.7.2"
-    "@react-spring/shared" "~9.7.2"
-    "@react-spring/types" "~9.7.2"
-
-"@react-spring/types@~9.7.2":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/types/-/types-9.7.2.tgz"
-  integrity sha512-GEflx2Ex/TKVMHq5g5MxQDNNPNhqg+4Db9m7+vGTm8ttZiyga7YQUF24shgRNebKIjahqCuei16SZga8h1pe4g==
-
-"@react-spring/web@~9.7.1":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/web/-/web-9.7.2.tgz"
-  integrity sha512-7qNc7/5KShu2D05x7o2Ols2nUE7mCKfKLaY2Ix70xPMfTle1sZisoQMBFgV9w/fSLZlHZHV9P0uWJqEXQnbV4Q==
-  dependencies:
-    "@react-spring/animated" "~9.7.2"
-    "@react-spring/core" "~9.7.2"
-    "@react-spring/shared" "~9.7.2"
-    "@react-spring/types" "~9.7.2"
-
-"@react-spring/zdog@~9.7.1":
-  version "9.7.2"
-  resolved "https://registry.npmjs.org/@react-spring/zdog/-/zdog-9.7.2.tgz"
-  integrity sha512-6z2qqhmbpoZrw1oThyn4zfejtLkuadsaZFVMFf/5l5cHTEdRC8HZsBRLo+Wiomkprg/F1hyhcXI5X1lJ+T/zdQ==
-  dependencies:
-    "@react-spring/animated" "~9.7.2"
-    "@react-spring/core" "~9.7.2"
-    "@react-spring/shared" "~9.7.2"
-    "@react-spring/types" "~9.7.2"
 
 "@reduxjs/toolkit@^1.9.5":
   version "1.9.5"
@@ -4036,11 +3950,6 @@ cjs-module-lexer@^1.0.0:
   resolved "https://registry.npmjs.org/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
 
-classnames@^2.2.5:
-  version "2.3.2"
-  resolved "https://registry.npmjs.org/classnames/-/classnames-2.3.2.tgz"
-  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
-
 clean-css@^5.2.2:
   version "5.3.2"
   resolved "https://registry.npmjs.org/clean-css/-/clean-css-5.3.2.tgz"
@@ -4902,11 +4811,6 @@ enhanced-resolve@^5.14.1:
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
-
-enquire.js@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.npmjs.org/enquire.js/-/enquire.js-2.1.6.tgz"
-  integrity sha512-/KujNpO+PT63F7Hlpu4h3pE3TokKRHN26JYmQpPyjkRD/N57R7bPDNojMXdi7uveAKjYB7yQnartCxZnFWr0Xw==
 
 entities@^2.0.0:
   version "2.2.0"
@@ -7107,13 +7011,6 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.npmjs.org/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
 
-json2mq@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/json2mq/-/json2mq-0.2.0.tgz"
-  integrity sha512-SzoRg7ux5DWTII9J2qkrZrqV1gt+rTaoufMxEzXbS26Uid0NwaJd123HcoB80TgubEppxxIGdNxCx50fEoEWQA==
-  dependencies:
-    string-convert "^0.2.0"
-
 json5@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/json5/-/json5-1.0.2.tgz"
@@ -7390,11 +7287,6 @@ memfs@^3.1.2, memfs@^3.4.3:
   integrity sha512-4kbWXbVZ+LU4XFDS2CuA7frnwz2HxCMB/0yOXc86q7aCQrfWKkL11t6al1e2CsVC7uhnBNTQ1TfUsAxVauO9IQ==
   dependencies:
     fs-monkey "^1.0.3"
-
-"memoize-one@>=3.1.1 <6":
-  version "5.2.1"
-  resolved "https://registry.npmjs.org/memoize-one/-/memoize-one-5.2.1.tgz"
-  integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
 
 merge-descriptors@1.0.1:
   version "1.0.1"
@@ -8859,34 +8751,6 @@ react-scripts@^5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
-react-slick@^0.29.0:
-  version "0.29.0"
-  resolved "https://registry.npmjs.org/react-slick/-/react-slick-0.29.0.tgz"
-  integrity sha512-TGdOKE+ZkJHHeC4aaoH85m8RnFyWqdqRfAGkhd6dirmATXMZWAxOpTLmw2Ll/jPTQ3eEG7ercFr/sbzdeYCJXA==
-  dependencies:
-    classnames "^2.2.5"
-    enquire.js "^2.1.6"
-    json2mq "^0.2.0"
-    lodash.debounce "^4.0.8"
-    resize-observer-polyfill "^1.5.0"
-
-react-spring@9.7.1:
-  version "9.7.1"
-  resolved "https://registry.npmjs.org/react-spring/-/react-spring-9.7.1.tgz"
-  integrity sha512-o2+r2DNQDVEuefiz33ZF76DPd/gLq3kbdObJmllGF2IUfv2W6x+ZP0gR97QYCSR4QLbmOl1mPKUBbI+FJdys2Q==
-  dependencies:
-    "@react-spring/core" "~9.7.1"
-    "@react-spring/konva" "~9.7.1"
-    "@react-spring/native" "~9.7.1"
-    "@react-spring/three" "~9.7.1"
-    "@react-spring/web" "~9.7.1"
-    "@react-spring/zdog" "~9.7.1"
-
-react-timer-hook@^3.0.6:
-  version "3.0.6"
-  resolved "https://registry.npmjs.org/react-timer-hook/-/react-timer-hook-3.0.6.tgz"
-  integrity sha512-6O1gcBT7R5gm2W14mGAu35KfX0tdJ9s817UDJTL7/IQUXqK6wkYgZzy1mSLa6N+AQGEhgoVCtTsP7tIhBmSD6A==
-
 react-transition-group@^4.4.5:
   version "4.4.5"
   resolved "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz"
@@ -8896,14 +8760,6 @@ react-transition-group@^4.4.5:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
-
-react-window@^1.8.9:
-  version "1.8.9"
-  resolved "https://registry.npmjs.org/react-window/-/react-window-1.8.9.tgz"
-  integrity sha512-+Eqx/fj1Aa5WnhRfj9dJg4VYATGwIUP2ItwItiJ6zboKWA6EX3lYDAXfGF2hyNqplEprhbtjbipiADEcwQ823Q==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    memoize-one ">=3.1.1 <6"
 
 react@^18.2.0:
   version "18.2.0"
@@ -9069,11 +8925,6 @@ reselect@^4.1.8:
   version "4.1.8"
   resolved "https://registry.npmjs.org/reselect/-/reselect-4.1.8.tgz"
   integrity sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==
-
-resize-observer-polyfill@^1.5.0:
-  version "1.5.1"
-  resolved "https://registry.npmjs.org/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz"
-  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-cwd@^3.0.0:
   version "3.0.0"
@@ -9563,11 +9414,6 @@ stop-iteration-iterator@^1.0.0:
   integrity sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==
   dependencies:
     internal-slot "^1.0.4"
-
-string-convert@^0.2.0:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/string-convert/-/string-convert-0.2.1.tgz"
-  integrity sha512-u/1tdPl4yQnPBjnVrmdLo9gtuLvELKsAoRapekWggdiQNvvvum+jYF329d84NAa660KQw7pB2n36KrIKVoXa3A==
 
 string-length@^4.0.1:
   version "4.0.2"

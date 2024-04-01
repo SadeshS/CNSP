@@ -235,7 +235,7 @@ const NavGroup = ({ item, lastItem, remItems, lastItemId }) => {
               sx={{ mr: 1 }}
               primary={
                 <Typography variant="h6" color={isSelected ? 'primary' : textColor} sx={{ fontWeight: isSelected ? 500 : 400 }}>
-                  {currentItem.id === lastItemId ? "More Items" : currentItem.title}
+                  {currentItem.id === lastItemId ? 'More Items' : currentItem.title}
                 </Typography>
               }
             />
