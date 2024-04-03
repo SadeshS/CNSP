@@ -12,7 +12,7 @@ from urllib.parse import unquote
 router = APIRouter()
 
 @router.post('/predict')
-async def predict(downloadURL: PredictData, background_tasks: BackgroundTasks, current_user=Depends(get_current_user)):
+async def predict(downloadURL: PredictData, current_user=Depends(get_current_user)):
     try:
         response = requests.get(downloadURL.url)
         response.raise_for_status()
@@ -28,7 +28,7 @@ async def predict(downloadURL: PredictData, background_tasks: BackgroundTasks, c
         missing_columns = [col for col in columns_to_check if col not in df.columns]
 
         if not missing_columns:
-            background_tasks.add_task(ps.run_predictions, current_user["uid"], df)
+            ps.run_predictions(current_user["uid"], df)
 
             return { "message": "Prediction is running in the background" }
         
