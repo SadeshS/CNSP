@@ -1,5 +1,5 @@
 from io import StringIO
-from fastapi import Depends, HTTPException, APIRouter, BackgroundTasks
+from fastapi import Depends, HTTPException, APIRouter
 from fastapi.responses import JSONResponse
 import pandas as pd
 from services.prediction_service import PredictionService
