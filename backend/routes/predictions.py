@@ -50,5 +50,7 @@ def delete_file(url):
     file_path = unquote(file_path)
     print(file_path)
     bucket = storage.bucket()
+    print(1)
     blob = bucket.blob(file_path)
+    print(2)
     blob.delete()
