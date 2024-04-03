@@ -50,7 +50,7 @@ jobs:
           env_vars: |
             FIREBASE_PROJECTID=${{ secrets.FIREBASE_PROJECTID }}
             FIREBASE_PRIVATEKEYID=${{ secrets.FIREBASE_PRIVATEKEYID }}
-            FIREBASE_PRIVATEKEY="${{ secrets.FIREBASE_PRIVATEKEY }}"
+            FIREBASE_PRIVATEKEY=${{ secrets.FIREBASE_PRIVATEKEY }}
             FIREBASE_CLIENTEMAIL=${{ secrets.FIREBASE_CLIENTEMAIL }}
             FIREBASE_CLIENTID=${{ secrets.FIREBASE_CLIENTID }}
             FIREBASE_CLIENTx509CERTURL="${{ secrets.FIREBASE_CLIENTx509CERTURL }}"
