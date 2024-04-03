@@ -36,7 +36,7 @@ def predict(pred_df, full_df):
                 last_date = product_df['ds'].max().strftime('%Y-%m-%d')
                 m = Prophet(interval_width=0.95)
                 m.fit(product_df)
-                future = m.make_future_dataframe(periods=1, freq='W', include_history=False)
+                future = m.make_future_dataframe(periods=1, freq='m', include_history=False)
                 forecast = m.predict(future)
                 forecast = forecast[['yhat', 'ds']]
                 forecast['user_id'] = cust_id
