@@ -5,15 +5,12 @@ import { Grid, Stack, Typography } from '@mui/material';
 
 // project-imports
 import Logo from 'components/logo';
-import useAuth from 'hooks/useAuth';
 import AuthWrapper from 'sections/auth/AuthWrapper';
 import FirebaseRegister from 'sections/auth/auth-forms/AuthRegister';
 
 // ================================|| REGISTER ||================================ //
 
 const Register = () => {
-  const { isLoggedIn } = useAuth();
-
   return (
     <AuthWrapper>
       <Grid container spacing={3}>
@@ -25,7 +22,7 @@ const Register = () => {
             <Typography variant="h3">Sign up</Typography>
             <Typography
               component={Link}
-              to={isLoggedIn ? '/auth/login' : '/login'}
+              to={'/login'}
               variant="body1"
               sx={{ textDecoration: 'none' }}
               color="primary"

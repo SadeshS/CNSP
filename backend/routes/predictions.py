@@ -13,7 +13,6 @@ router = APIRouter()
 
 @router.post('/predict')
 async def predict(downloadURL: PredictData, background_tasks: BackgroundTasks, current_user=Depends(get_current_user)):
-    print(downloadURL)
     try:
         response = requests.get(downloadURL.url)
         response.raise_for_status()

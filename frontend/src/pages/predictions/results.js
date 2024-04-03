@@ -268,7 +268,7 @@ export default function Results() {
                 .map((row) => {
                   if (typeof row === 'number') return null;
 
-                  return <Row key={row.name} row={row} />;
+                  return <Row key={row.id} row={row} />;
                 })}
 
             {emptyRows > 0 && (
