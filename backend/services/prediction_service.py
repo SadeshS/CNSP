@@ -33,7 +33,7 @@ class PredictionService:
 
             us.update_user(user)
 
-            df =  run(df)
+            df = run(df)
             predictions = df.apply(self.row_to_prediction, axis=1).tolist()
 
             user = us.get_user(uid)

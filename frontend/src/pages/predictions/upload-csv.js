@@ -40,56 +40,58 @@ const UploadCSV = () => {
                   const storage = getStorage();
                   const storageRef = ref(storage, `${user.id}/${values.files[0].name}`);
 
-                  uploadBytes(storageRef, values.files[0]).then((snapshot) => {
-                    getDownloadURL(snapshot.ref).then((downloadURL) => {
-                      axiosService
-                        .post(
-                          `/predictions/predict`,
-                          {
-                            url: downloadURL
-                          },
-                          {
-                            headers: {
-                              Authorization: `Bearer ${token}`
+                  uploadBytes(storageRef, values.files[0])
+                    .then((snapshot) => {
+                      getDownloadURL(snapshot.ref).then((downloadURL) => {
+                        axiosService
+                          .post(
+                            `/predictions/predict`,
+                            {
+                              url: downloadURL
+                            },
+                            {
+                              headers: {
+                                Authorization: `Bearer ${token}`
+                              }
                             }
-                          }
-                        )
-                        .then((response) => {
-                          dispatch(
-                            openSnackbar({
-                              open: true,
-                              message: response.data.message,
-                              variant: 'alert',
-                              alert: {
-                                color: 'success'
-                              },
-                              close: true
-                            })
-                          );
-                          setIsLoading(false);
-                          navigate('/');
-                        })
-                        .catch(function (err) {
-                          dispatch(
-                            openSnackbar({
-                              open: true,
-                              message:
-                                err.response.status == 400
-                                  ? err.response.data.message
-                                  : 'Error while uploading the csv file. Please try again later.',
-                              variant: 'alert',
-                              alert: {
-                                color: 'error'
-                              },
-                              close: true
-                            })
-                          );
-                          setIsLoading(false);
-                        });
+                          )
+                          .then((response) => {
+                            dispatch(
+                              openSnackbar({
+                                open: true,
+                                message: response.data.message,
+                                variant: 'alert',
+                                alert: {
+                                  color: 'success'
+                                },
+                                close: true
+                              })
+                            );
+                            setIsLoading(false);
+                            navigate('/');
+                          })
+                          .catch(function (err) {
+                            dispatch(
+                              openSnackbar({
+                                open: true,
+                                message:
+                                  err.response.status == 400
+                                    ? err.response.data.message
+                                    : 'Error while uploading the csv file. Please try again later.',
+                                variant: 'alert',
+                                alert: {
+                                  color: 'error'
+                                },
+                                close: true
+                              })
+                            );
+                            setIsLoading(false);
+                          });
+                      });
+                    })
+                    .catch(() => {
+                      setIsLoading(false);
                     });
-                  }).catch(() => {
-                    setIsLoading(false);
-                  });
                 }
               }}
               validationSchema={yup.object().shape({
