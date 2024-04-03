@@ -2,8 +2,6 @@ import firebase_admin
 from firebase_admin import credentials, auth, firestore, storage
 from config.config import settings
 
-print("hi", settings.FIREBASE_PRIVATEKEY.replace(r'\n', '\n'));
-
 cred = credentials.Certificate({
     "type": "service_account",
     "project_id": settings.FIREBASE_PROJECTID,
