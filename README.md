@@ -9,7 +9,8 @@ The CNSP app is designed to predict the contents of a customer's next shopping c
 ### Architecture
 
 - **Frontend**: Built with React and utilizes Material UI (MUI) for the design framework.
-- **Backend**: Developed with FastAPI, it includes two prediction models. The first model uses KNN-DTW for item prediction, based on previous work by Klaus. The second model for quantity prediction is built with Meta's Prophet.
+- **Backend**: Developed with FastAPI, it includes two prediction models. The first model uses KNN-DTW for item prediction, based on previous work by [Mathias Kraus](https://github.com/MathiasKraus/MarketBasket). The second model for quantity prediction is built with Meta's Prophet.
+- **Model**: Model can be found at [https://github.com/CNSP-FYP-Sadesh/model](https://github.com/CNSP-FYP-Sadesh/model)
 
 ## Dockerization
 
@@ -23,3 +24,11 @@ The project is fully dockerized with separate Dockerfiles for the frontend and b
 ## Getting Started
 
 To run the project locally, ensure Docker and Docker Compose are installed on your system. Then, clone this repository and from the root directory, run:
+
+```
+docker-compose up --build
+```
+
+This command builds and starts both the frontend and backend services. You can access the frontend on `localhost:3000` and the backend on `localhost:8080` by default, unless configured otherwise.
+
+For more detailed information on each component, refer to the respective README.md files in the `frontend` and `backend` directories.
