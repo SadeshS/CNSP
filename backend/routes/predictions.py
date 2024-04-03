@@ -48,6 +48,7 @@ def delete_file(url):
     path_end = url.find("?alt=media")
     file_path = url[path_start:path_end]
     file_path = unquote(file_path)
+    print(file_path)
     bucket = storage.bucket()
     blob = bucket.blob(file_path)
     blob.delete()
