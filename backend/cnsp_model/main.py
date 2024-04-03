@@ -38,6 +38,7 @@ def run(df):
 
     # Item prediction using KNN-DTW
     knndtw = KnnDtw(n_neighbors=[5])
+    print("Predicting Items...............")
     preds_all, distances = knndtw.predict(train_ub, val_ub_input, embedding_wrapper.basket_dist_EMD, 
                                           embedding_wrapper.basket_dist_REMD)
 
@@ -64,6 +65,7 @@ def run(df):
     new_basket_df = new_df.groupby(['User', 'distances'])['product_id'].apply(list).reset_index()
 
     # Quantity and date prediction using meta prophet
+    print("Predicting Quantity...............")
     result_df = predict(new_basket_df, final_df)
     result_df = result_df[result_df['quantity'] > 0]
     result_df['quantity'] = result_df['quantity'].apply(np.ceil).astype(int)
