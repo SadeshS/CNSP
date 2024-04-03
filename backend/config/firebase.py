@@ -15,6 +15,7 @@ cred = credentials.Certificate({
     "client_x509_cert_url": settings.FIREBASE_CLIENTx509CERTURL,
     "universe_domain": "googleapis.com"
 })
+print(settings.FIREBASE_STORAGEBUCKETURL)
 firebase = firebase_admin.initialize_app(cred, {
     'storageBucket': settings.FIREBASE_STORAGEBUCKETURL
 })
